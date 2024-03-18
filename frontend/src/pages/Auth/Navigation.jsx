@@ -11,11 +11,12 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./Navigation.css";
 import { useSelector, useDispatch } from "react-redux";
-import { useLoginMutation } from "../../redux/api/userApiSlice";
+import { useLogoutMutation } from "../../redux/api/userApiSlice";
 import { logout } from "../../redux/features/auth/authSlice";
 
 const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
+ 
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
@@ -35,15 +36,15 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const naviagte = useNavigate();
 
-  const [logoutApiCall] = useLoginMutation();
+  const [logoutApiCall] = useLogoutMutation();
 
   const logoutHandler = async () => {
     try {
       await logoutApiCall().unwrap();
       dispatch(logout());
-      navigate("/login");
+      naviagte("/login");
     } catch (error) {
-      console.log("error");
+      console.error(error);
     }
   };
 
@@ -96,31 +97,119 @@ const Navigation = () => {
           ) : (
             <></>
           )}
-        </button>
-      </div>
 
-      <ul>
-        <li>
-          <Link
-            to="/login"
-            className="flex items-center transition-transform transform hover:translate-x-2"
+          {userInfo && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className={`h-4 w-4 ml-1 ${
+                dropdownOpen ? "transform rotate-180" : ""
+              }`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="white"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d={dropdownOpen ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"}
+              />
+            </svg>
+          )}
+        </button>
+        {dropdownOpen && userInfo && (
+          <ul
+            className={`absolute right-0 mt-2 mr-14 space-y-2 bg-black text-gray-600 ${
+              !userInfo.isAdmin ? "-top-20" : "-top-60"
+            } `}
           >
-            <AiOutlineLogin className="mr-2 mt-[3rem]" size={26} />
-            <span className="hidden nav-item-name mt-[3rem]">LOGIN</span>{" "}
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="/register"
-            className="flex items-center transition-transform transform hover:translate-x-2"
-          >
-            <AiOutlineUserAdd className="mr-2 mt-[3rem]" size={26} />
-            <span className="hidden nav-item-name mt-[3rem]">
-              REGISTER
-            </span>{" "}
-          </Link>
-        </li>
-      </ul>
+            {userInfo.isAdmin && (
+              <>
+                <li>
+                  <Link
+                    to="/admin/dashboard"
+                    className="bg-black px-4 py-2 hover:text-white"
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/admin/productlist"
+                    className="bg-black px-4 py-2 hover:text-white"
+                  >
+                    Products
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/admin/categorylist"
+                    className="bg-black px-4 py-2 hover:text-white"
+                  >
+                    Category
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/admin/orderlist"
+                    className="bg-black px-4 py-2 hover:text-white"
+                  >
+                    Orders
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/admin/userlist"
+                    className="bg-black px-4 py-2 hover:text-white"
+                  >
+                    Users
+                  </Link>
+                </li>
+              </>
+            )}
+            <li>
+              <Link
+                to="/admin/profile"
+                className="bg-black px-4 py-2 hover:text-white"
+                >
+                Profile
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/admin/logout"
+                onClick={logoutHandler}
+                className="bg-black px-4 py-2 hover:text-white"
+                >
+                Logout
+              </Link>
+            </li>
+          </ul>
+        )}
+
+        {!userInfo && (
+          <ul>
+            <li>
+              <Link
+                to="/login"
+                className="flex items-center mt-5 transition-transform transform hover:translate-x-2"
+              >
+                <AiOutlineLogin className="mr-2 mt-[4px]" size={26} />
+                <span className="hidden nav-item-name">LOGIN</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/register"
+                className="flex items-center mt-5 transition-transform transform hover:translate-x-2"
+              >
+                <AiOutlineUserAdd size={26} />
+                <span className="hidden nav-item-name">REGISTER</span>
+              </Link>
+            </li>
+          </ul>
+        )}
+      </div>
     </div>
   );
 };
