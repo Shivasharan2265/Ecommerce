@@ -54,7 +54,7 @@ const Login = () => {
               <input
                 type="email"
                 id="email"
-                className="mt-1 p-2 w-[35rem] border rounded bg-black  text-white w-full"
+                className="sp mt-1 p-2 w-[30rem] border rounded bg-black  text-white w-full"
                 placeholder="Enter email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -71,7 +71,7 @@ const Login = () => {
               <input
                 type="password"
                 id="password"
-                className="mt-1 p-2 w-[35rem] border rounded bg-black  text-white w-full"
+                className="sp mt-1 p-2 w-[30rem] border rounded bg-black  text-white w-full"
                 placeholder="Enter password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

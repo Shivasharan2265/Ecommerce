@@ -9,4 +9,8 @@ body {
   input,
 textarea {
   color: #000;
+  
+}
+.sp{
+  width: 30rem !important;
 }
