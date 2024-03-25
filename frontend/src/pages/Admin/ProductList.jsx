@@ -44,7 +44,7 @@ const ProductList = () => {
         toast.error("Product create failed. Try Again.");
       } else {
         toast.success(`${data.name} is created`);
-        navigate("/");
+        navigate("/admin/allproductslist");
       }
     } catch (error) {
       console.error(error);
@@ -101,6 +101,7 @@ const ProductList = () => {
               <label htmlFor="name">Name</label> <br />
               <input
                 type="text"
+                
                 id="name"
                 className="p-4 mt-1 mb-3 w-[30rem] border border-stone-500 rounded-lg bg-[#101011] text-white "
                 value={name}
