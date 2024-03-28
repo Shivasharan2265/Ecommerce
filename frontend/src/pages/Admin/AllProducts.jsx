@@ -20,20 +20,20 @@ const AllProducts = () => {
           <div className="ml-[2rem] text-xl  font-bold h-12">
             All proucts ({products.length})
           </div>
-          <div className="flex flex-wrap justify-around items-center">
+          <div className=" ml-[-4rem] flex flex-wrap justify-around items-center w-[80rem]">
             {products.map((product) => (
               <Link
                 key={product._id}
                 to={`./admin/product/update/${product._id}`}
-                className="block mb-4 overflow-hidden"
+                className="block mb-4 overflow-hidden "
               >
                 <div className="flex">
                   <img
                     src={product.image}
                     alt="{product.name}"
-                    className="w-[10rem] object-cover"
+                    className="w-[12rem] object-cover"
                   />
-                  <div className="p-4 flex flex-col justify-around">
+                  <div className="p-4 flex flex-col justify-around w-[23rem]">
                     <div className="flex justify-between">
                       <h5 className="text-xl font-semibold mb-2">
                         {product.name}
@@ -53,20 +53,20 @@ const AllProducts = () => {
                       >
                         Update Product
                         <svg
-                            className="w-3.5 h-3.5 ml-2"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 14 10"
-                          >
-                            <path
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M1 5h12m0 0L9 1m4 4L9 9"
-                            />
-                          </svg>
+                          className="w-3.5 h-3.5 ml-2"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 14 10"
+                        >
+                          <path
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M1 5h12m0 0L9 1m4 4L9 9"
+                          />
+                        </svg>
                       </Link>
                       <p>$ {product?.price}</p>
                     </div>
@@ -77,7 +77,7 @@ const AllProducts = () => {
           </div>
         </div>
         <div className="md:w-1/4 p-3 mt-2">
-            <AdminMenu />
+          <AdminMenu />
         </div>
       </div>
     </div>
