@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { productApiSlice } from "../../redux/api/productApiSlice";
 import HeartIcon from "./HeartIcon";
 
 const Product = ({ product }) => {
