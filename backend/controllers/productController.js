@@ -175,23 +175,37 @@ const addProductReview = asyncHandler(async (req, res) => {
 const fetchTopProducts = asyncHandler(async (req, res) => {
   try {
     const products = await Product.find({}).sort({ rating: -1 }).limit(4);
-    res.json(products)
+    res.json(products);
   } catch (error) {
     console.error(error);
     res.status(400).json(error.messsage);
   }
 });
 
-const fetchNewProducts = asyncHandler(async(req, res) => {
-  try{
-    const products = await Product.find().sort({_id: -1}).limit(5)
-    res.json(products)
-  }catch(error){
+const fetchNewProducts = asyncHandler(async (req, res) => {
+  try {
+    const products = await Product.find().sort({ _id: -1 }).limit(5);
+    res.json(products);
+  } catch (error) {
     console.error(error);
     res.status(400).json(error.messsage);
-
   }
-})
+});
+
+const filterProducts = asyncHandler(async (req, res) => {
+  try {
+    const { checked, radio } = req.body;
+    let args = {};
+    if (checked.length > 0) args.category = checked;
+    if (radio.lenght) args.price = { $gte: radio[0], $lte: radio[1] };
+
+    const products = await Product.find(args);
+    res.json(products);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Server Error" });
+  }
+});
 
 export {
   addProduct,
@@ -203,4 +217,5 @@ export {
   addProductReview,
   fetchTopProducts,
   fetchNewProducts,
+  filterProducts,
 };
