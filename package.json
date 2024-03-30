@@ -1,5 +1,5 @@
 {
-  "engines":{
+  "engines": {
     "node": "v21.6.1"
   },
   "name": "ecommerce",
@@ -25,6 +25,7 @@
     "express-formidable": "^1.2.0",
     "flowbite": "^2.3.0",
     "jsonwebtoken": "^9.0.2",
+    "mongo": "^0.1.0",
     "mongoose": "^8.2.1",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^3.1.0",
