@@ -3,9 +3,9 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import {
+  useGetProductDetailsQuery,
   useCreateReviewMutation,
 } from "../../redux/api/productApiSlice";
-import { useGetProductDeatilsQuery } from "../../redux/api/productApiSlice";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
 import {
@@ -35,7 +35,7 @@ const ProductDetails = () => {
     isLoading,
     refetch,
     error,
-  } = useGetProductDeatilsQuery(productId);
+  } = useGetProductDetailsQuery(productId);
 
   const { userInfo } = useSelector((state) => state.auth);
 
@@ -87,7 +87,7 @@ const ProductDetails = () => {
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full xl:w-[30rem] lg:w-[45rem] md:w-[30rem] sm:w-[20rem] mr-[2rem]"
+                className="w-full xl:w-[50rem] lg:w-[45rem] md:w-[30rem] sm:w-[20rem] mr-[2rem]"
               />
 
               <HeartIcon product={product} />
@@ -143,7 +143,7 @@ const ProductDetails = () => {
                     <select
                       value={qty}
                       onChange={(e) => setQty(e.target.value)}
-                      className="p-2 w-[6rem] rounded-lg bg-black text-white"
+                      className="p-2 w-[6rem] rounded-lg text-black"
                     >
                       {[...Array(product.countInStock).keys()].map((x) => (
                         <option key={x + 1} value={x + 1}>
